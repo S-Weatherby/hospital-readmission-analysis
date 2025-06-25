@@ -1,0 +1,7 @@
+condition_short,n,mean_readmission,median_readmission,sd_readmission
+Hip/Knee Surgery,1588,1.004,0.991,0.144
+COPD,2324,1.002,0.997,0.054
+Heart Attack,1763,1.002,1,0.071
+Heart Failure,2638,1.001,1.001,0.067
+Heart Surgery,883,1.001,0.999,0.08
+Pneumonia,2731,1.001,0.997,0.065

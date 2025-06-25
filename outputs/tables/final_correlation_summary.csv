@@ -1,0 +1,5 @@
+Variable,Correlation,Abs_Correlation,Strength,Interpretation,Use_in_Model
+Hospital Overall Rating,-0.281,0.281,Moderate,Higher quality ratings → Lower readmissions (expected),Consider
+Predicted Readmission Rate,0.235,0.235,Weak-Moderate,CMS prediction aligns with actual ratios (validation),Maybe
+Number of Discharges,-0.115,0.115,Weak,Larger hospitals → Slightly lower readmissions (interesting),Consider
+Expected Readmission Rate,-0.054,0.054,Very Weak,Very weak relationship (unexpected),Exclude

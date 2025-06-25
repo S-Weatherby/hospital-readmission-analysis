@@ -1,0 +1,7 @@
+hospital_ownership_clean,n,mean_readmission,median_readmission,sd_readmission,min_readmission,max_readmission
+For-Profit,2149,1.018,1.011,0.081,0.553,1.643
+Government,1497,1,0.997,0.072,0.743,1.492
+Non-Profit,8133,0.998,0.995,0.08,0.478,1.492
+NA,41,0.995,0.997,0.067,0.826,1.19
+Tribal,13,0.991,0.973,0.051,0.929,1.075
+Physician,94,0.95,0.98,0.147,0.576,1.248

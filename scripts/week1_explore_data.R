@@ -417,7 +417,19 @@ p5_hosp_type <- analysis_data %>%
   )
 
 print(p5_hosp_type)
-#### Acute and N/a
+#### Acute and N/a ??
+
+hospitals_with_types <- hospitals_clean %>%
+  filter(!is.na(hospital_type_clean) & hospital_type_clean != "Acute Care") %>%
+  select(facility_id, hospital_type_clean)
+
+print(paste("Hospitals with non-Acute Care types:", nrow(hospitals_with_types)))
+
+# have readmission data
+readmissions_ids <- unique(readmissions_clean$facility_id[readmissions_clean$reliable_for_analysis])
+overlap <- sum(hospitals_with_types$facility_id %in% readmissions_ids)
+
+print(paste("Non-Acute Care hospitals with readmission data:", overlap))
 
 p6_state <- analysis_data %>% 
   filter(reliable_for_analysis == TRUE) %>% 
