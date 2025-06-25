@@ -51,10 +51,12 @@ hospitals <- hospitals %>%
   select(-contains("safety_measures"))
   select(-contains("pt_exp"))
   
-hospitals <- hospitals %>% 
+hospitals_clean <- hospitals_clean %>% 
   select(-telephone_number)
+
+hospitals_clean <- hospitals_clean %>% 
   select(-address)
-  
+
 print(unique(hospitals$hospital_ownership))
 print(unique(hospitals$hospital_type))
 
@@ -175,10 +177,8 @@ hospitals_clean <- hospitals %>%
       TRUE ~ count_of_facility_te_measures
     ),
     count_of_facility_te_measures = as.numeric(count_of_facility_te_measures)
-  ) %>%
+  )
   
-  # Remove any completely empty rows
-  filter(!is.na(facility_id))
 
 # Check the results
 print("=== HOSPITALS DATA CLEANING SUMMARY ===")
@@ -207,10 +207,14 @@ missing_summary <- hospitals_clean %>%
   )
 print(missing_summary)
 
+##removing addess and phone number
+hospitals_clean <- hospitals_clean %>% 
+  select(-telephone_number, -address)
+
 # Save cleaned hospitals data
 write_csv(hospitals_clean, "data/clean/hospitals_cleaned.csv")
 
-print("\n✅ Hospitals data cleaning complete!")
+print(colnames(hospitals_clean))
 
 #### readmissions table
   readmissions_clean <- readmissions %>%
@@ -276,7 +280,7 @@ print("\n✅ Hospitals data cleaning complete!")
       ),
       gets_penalty = factor(gets_penalty, levels = c(0, 1), labels = c("No", "Yes")),
       
-      # Clean condition names for easier analysis (ADDED)
+      # Clean condition names for easier analysis 
       condition_short = case_when(
         str_detect(measure_name, "AMI") ~ "Heart Attack",
         str_detect(measure_name, "HF") ~ "Heart Failure", 
@@ -318,7 +322,6 @@ print("\n✅ Hospitals data cleaning complete!")
                                            !data_quality_issue)
     )
   
-  
   readmissions_clean <- readmissions_clean %>%
     mutate(
       # Convert dates from MM/DD/YYYY format
@@ -340,9 +343,16 @@ print("\n✅ Hospitals data cleaning complete!")
 summary(readmissions_clean)
 summary(hospitals_clean)
 
-# Create your first plots
-p1 <- readmissions %>%
-  ggplot(aes(x = readmission_rate)) +
+analysis_data <- readmissions_clean %>%
+  filter(reliable_for_analysis == TRUE) %>%
+  left_join(hospitals_clean, by = "facility_id")
+
+# Plots
+
+### Distribution plots
+p1_distribution <- readmissions_clean %>%
+  filter(reliable_for_analysis == TRUE) %>%
+  ggplot(aes(x = excess_readmission_ratio)) +
   geom_histogram(bins = 30, fill = "steelblue", alpha = 0.7) +
   labs(
     title = "Distribution of Hospital Readmission Rates",
@@ -351,7 +361,82 @@ p1 <- readmissions %>%
   ) +
   theme_minimal()
 
-# Save plot
-ggsave("outputs/plots/readmission_distribution.png", p1, width = 10, height = 6)
+print(p1_distribution) 
 
-print("Week 1 complete! Check outputs/plots/ for your first visualization.")
+p2_distribution_predicted <- readmissions_clean %>%
+  filter(reliable_for_analysis == TRUE) %>%
+  ggplot(aes(x = predicted_readmission_rate)) +
+  geom_histogram(bins = 30, fill = "steelblue", alpha = 0.7) +
+  labs(
+    title = "Distribution of Predicted Hospital Readmission Rates",
+    x = "Predicted Readmission Rate (%)",
+    y = "Number of Hospitals"
+  ) +
+  theme_minimal()
+
+print(p2_distribution_predicted) 
+
+##### actual readmission more centralized compared to predicted
+
+#### Comparison plots
+
+p3_measures <- analysis_data %>% 
+  filter(reliable_for_analysis == TRUE) %>% 
+  ggplot(aes(x = condition_short, y = excess_readmission_ratio)) +
+  geom_boxplot(fill = "purple", alpha = 0.7) +
+  labs(
+    title = "Measures vs Readmissions",
+    x = "Measure",
+    y = "Readmission Ratio"
+  )
+
+print(p3_measures)
+### Hip/knee largest, COPD smallest
+
+p4_hosp_own <- analysis_data %>% 
+  filter(reliable_for_analysis == TRUE) %>% 
+  ggplot(aes(x = hospital_ownership_clean, y = excess_readmission_ratio)) +
+  geom_boxplot(fill = "purple") +
+  labs(
+    title = "Hospital Ownership vs Readmissions",
+    x = "Hospital Ownership Type",
+    y = "Readmission Ratio"
+  )
+
+print(p4_hosp_own)
+### Physician largest
+
+p5_hosp_type <- analysis_data %>% 
+  filter(reliable_for_analysis == TRUE) %>% 
+  ggplot(aes(x = hospital_type_clean, y = excess_readmission_ratio)) +
+  geom_boxplot(fill = "purple") +
+  labs(
+    title = "Hospital Type vs Readmissions",
+    x = "Hospital Type",
+    y = "Readmission Ratio"
+  )
+
+print(p5_hosp_type)
+#### Acute and N/a
+
+p6_state <- analysis_data %>% 
+  filter(reliable_for_analysis == TRUE) %>% 
+  ggplot(aes(x = state.x, y = excess_readmission_ratio)) +
+  geom_boxplot(fill = "purple") +
+  labs(
+    title = "States vs Readmissions",
+    x = "State",
+    y = "Readmission Ratio"
+  )
+
+print(p6_state)
+#### A lot
+
+# Plot saves
+ggsave("outputs/plots/readmission_distribution.png", p1_distribution, width = 10, height = 6)
+ggsave("outputs/plots/predicted_readmission_distribution.png", p2_distribution_predicted, width = 10, height = 6)
+ggsave("outputs/plots/measures_v_readmission.png", p3_measures, width = 10, height = 6)
+ggsave("outputs/plots/hosp_own_v_readmission.png", p4_hosp_own, width = 10, height = 6)
+ggsave("outputs/plots/hosp_type_v_readmission.png", p5_hosp_type, width = 10, height = 6)
+ggsave("outputs/plots/states_readmission.png", p6_state, width = 10, height = 6)
+
