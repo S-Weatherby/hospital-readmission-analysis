@@ -1,0 +1,6 @@
+Model,AUC,Performance,Variables,Complexity
+Model 1: Ownership Only,0.534,Poor,Hospital Ownership (5 categories),Low
+Model 2: Ownership + Rating,0.622,Fair,Hospital Ownership + Star Rating,Medium
+Model 3: Rating Only,0.617,Fair,Hospital Star Rating Only,Low
+Model 4: Rating + Region,0.626,Fair,Hospital Star Rating + Geographic Region,Medium
+Final Model: Rating + Ownership + Region,0.629,Fair,Hospital Star Rating + Ownership + Region,Medium-High
