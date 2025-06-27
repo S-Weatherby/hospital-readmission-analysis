@@ -1,0 +1,5 @@
+ownership_simple,n_hospitals,avg_risk_score,median_risk_score,high_risk_hospitals,high_risk_percentage
+Other,17,58.7,58.7,12,70.6
+For-Profit,454,57.7,57.7,333,73.3
+Government,318,48.2,48.2,132,41.5
+Non-Profit,1704,47,47,562,33

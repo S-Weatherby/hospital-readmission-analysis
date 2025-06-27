@@ -1,0 +1,8 @@
+region,n_hospitals,avg_risk_score,median_risk_score,high_risk_hospitals,high_risk_percentage
+Northeast,116,54.7,54.7,67,57.8
+Mid-Atlantic,343,53.7,53.7,235,68.5
+South,713,52.4,52.4,337,47.3
+South Central,232,50.4,50.4,117,50.4
+Pacific,319,49.2,49.2,117,36.7
+Midwest,594,45.1,45.1,137,23.1
+Mountain West,176,35.5,35.5,29,16.5

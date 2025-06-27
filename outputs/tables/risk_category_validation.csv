@@ -1,0 +1,6 @@
+risk_category,n_hospitals,actual_penalties,actual_penalty_rate,avg_risk_score,score_range
+High Risk,356,273,76.7,72.5,71.1 - 78.2
+Medium-High Risk,4308,2528,58.7,59.3,50 - 69.2
+Medium Risk,6252,2657,42.5,42.1,30.1 - 49.7
+Low-Medium Risk,359,84,23.4,25.5,21.2 - 29.5
+Low Risk,16,1,6.2,19.7,19.7 - 19.7

@@ -1,0 +1,6 @@
+metric,value,format
+Total Hospitals,2493,count
+Average Risk Score,49.2,score
+High Risk Hospitals,1039,count
+Model AUC,0.629,decimal
+Overall Penalty Rate,49.1,percentage
