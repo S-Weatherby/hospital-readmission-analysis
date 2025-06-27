@@ -1,0 +1,2 @@
+Final_Model,AUC,Parameters,Key_Predictors,Business_Insight
+Rating + Ownership + Region,0.629,13,"Hospital Rating, Region, Ownership",1-star rating increase = 30% lower penalty odds
