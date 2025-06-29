@@ -2,7 +2,7 @@
 
 ## Hospital Penalty Risk Assessment Dashboard
 
-![Dashboard Preview]([hospital_penalty_risk_dashboard.png](https://github.com/S-Weatherby/hospital-readmission-analysis/blob/main/outputs/plots/dashboard/Hospital%20Readmission%20Dashboard.png))
+![Dashboard Preview]([[hospital_penalty_risk_dashboard.png](https://github.com/S-Weatherby/hospital-readmission-analysis/blob/main/outputs/plots/dashboard/Hospital%20Readmission%20Dashboard.png)](https://github.com/S-Weatherby/hospital-readmission-analysis/blob/main/outputs/plots/dashboard/Hospital%20Readmission%20Dashboard.png))
 
 ### Dashboard Components
 
