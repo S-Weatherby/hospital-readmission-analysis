@@ -65,7 +65,7 @@ All primary predictors showed high statistical significance (p < 0.001), indicat
 ## 📊 Dashboard Visualization
 
 ### Hospital Penalty Risk Assessment Dashboard
-![Hospital Dashboard](outputs/plots/dashboard/hospital_penalty_risk_dashboard.png)
+![Hospital Dashboard]([outputs/plots/dashboard/hospital_penalty_risk_dashboard.png](https://public.tableau.com/app/profile/shelita.smith/viz/HospitalReadmissionRiskPredictionModel/Dashboard1)
 
 **Key Features:**
 - Interactive geographic risk mapping
